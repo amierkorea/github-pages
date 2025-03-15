@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>염주팔찌 계산기</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        input { margin: 10px 0; }
+        button { margin-top: 10px; }
+    </style>
+</head>
+<body>
+    <h1>염주팔찌 계산기</h1>
+    <label for="wristCircumference">손목 둘레 (cm): </label>
+    <input type="number" id="wristCircumference" placeholder="예: 20" required>
+    <br>
+    <label for="beadDiameter">염주알 지름 (cm): </label>
+    <input type="number" id="beadDiameter" placeholder="예: 1" required>
+    <br>
+    <button onclick="calculate()">계산하기</button>
+
+    <h2>결과:</h2>
+    <p id="result"></p>
+
+    <script>
+        function calculate() {
+            const wristCircumference = parseFloat(document.getElementById('wristCircumference').value);
+            const beadDiameter = parseFloat(document.getElementById('beadDiameter').value);
+
+            if (isNaN(wristCircumference) || isNaN(beadDiameter)) {
+                document.getElementById('result').innerText = "잘못된 입력입니다.";
+                return;
+            }
+
+            const circumference = wristCircumference + Math.PI; // 손목 둘레 + 여유
+            const threadLength = circumference + 10; // 필요한 염주실 길이
+            const beadCount = Math.ceil(circumference / beadDiameter); // 필요한 염주알 개수
+
+            document.getElementById('result').innerText = `필요한 염주실 길이: ${threadLength.toFixed(2)} cm\n필요한 염주알 개수: ${beadCount} 개`;
+        }
+    </script>
+</body>
+</html>
